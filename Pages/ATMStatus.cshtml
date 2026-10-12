@@ -1,0 +1,542 @@
+﻿@page
+@model ATMMonitoringWebApp.Pages.ATMStatusModel
+@{
+    ViewData["Title"] = "SST Status";
+}
+
+<div class="dashboard-container compact-page">
+
+    <div class="page-title-row">
+        <div class="compact-title">
+            <h1>SST Status</h1>
+        </div>
+    </div>
+
+    <div class="sst-search-panel">
+
+        <div class="sst-terminal-grid">
+            <div class="sst-field">
+                <label>Terminal ID</label>
+                <input id="sstTerminalId" value="CAS2CHN01" readonly />
+            </div>
+
+            <div class="sst-field">
+                <label>Location</label>
+                <input id="sstLocation" value="Test Lab" readonly />
+            </div>
+
+            <div class="sst-field">
+                <label>Terminal IP</label>
+                <input id="sstTerminalIp" value="172.19.9.174" readonly />
+            </div>
+
+            <div class="sst-field">
+                <label>State</label>
+                <input id="sstState" value="Tamil Nadu" readonly />
+            </div>
+
+            <div class="sst-field">
+                <label>Nat IP</label>
+                <input id="sstNatIp" value="10.10.100.120" readonly />
+            </div>
+
+            <div class="sst-field">
+                <label>Region</label>
+                <input id="sstRegion" value="South" readonly />
+            </div>
+        </div>
+
+        <div class="sst-search-box">
+            <div class="sst-search-row">
+                <input id="sstSearchInput" value="CAS2CHN01" />
+                <button id="sstSearchBtn" class="sst-search-btn">🔍</button>
+            </div>
+
+            <div class="sst-last-modified">
+                <span>Last modified</span>
+                <input id="sstLastModified" value="29-05-2026 10:00:01" readonly />
+            </div>
+        </div>
+
+    </div>
+
+    <div class="sst-tab-bar">
+        <button class="sst-tab-btn active" data-tab="systemInfoTab">System Info</button>
+        <button class="sst-tab-btn" data-tab="tssManagementTab">TSS Management</button>
+        <button class="sst-tab-btn" data-tab="hdeManagementTab">HDE Management</button>
+        <button class="sst-tab-btn" data-tab="appNotificationTab">App Notification</button>
+        <button class="sst-tab-btn" data-tab="usbNotificationTab">USB Notification</button>
+        <button class="sst-tab-btn" data-tab="jobStatusTab">Job Status</button>
+    </div>
+
+    <div id="systemInfoTab" class="sst-tab-content active">
+
+        <div class="sst-updated-row">
+            <strong>Last Updated :</strong>
+            <span id="sstLastUpdated">29-05-2026 10:00:01</span>
+        </div>
+
+        <div class="sst-info-grid">
+
+            <table class="sst-info-table">
+                <tbody>
+                    <tr><td>Terminal Status</td><td id="terminalStatus">Connected</td></tr>
+                    <tr><td>Processor</td><td id="processor">Intel(R) Core(TM) i5-9500TE CPU @@ 2.20GHz</td></tr>
+                    <tr><td>Mother Board</td><td id="motherBoard">DURGA-H31(DAH31-027)</td></tr>
+                    <tr><td>RAM</td><td id="ram">8GB</td></tr>
+                    <tr><td>OS Name</td><td id="osName">Microsoft Windows 10 IoT Enterprise LTSC</td></tr>
+                    <tr><td>OS Version</td><td id="osVersion">1098</td></tr>
+                    <tr><td>Client Version</td><td id="clientVersion">3.2.0.8</td></tr>
+                    <tr><td>Policy Version</td><td id="policyVersion">1031</td></tr>
+                    <tr><td>HIPA Protection</td><td id="hipaProtection">ON</td></tr>
+                    <tr><td>CD/DVD Protection</td><td id="cdProtection">ON</td></tr>
+                    <tr><td>USB Protection</td><td id="usbProtection">ON</td></tr>
+                    <tr><td>Power Shell Protection</td><td id="powerShellProtection">ON</td></tr>
+                    <tr><td>Auto Run Protection</td><td id="autoRunProtection">ON</td></tr>
+                    <tr><td>Command Prompt Protection</td><td id="cmdProtection">ON</td></tr>
+                    <tr><td>Control Panel Protection</td><td id="controlPanelProtection">ON</td></tr>
+                    <tr><td>Registry Protection</td><td id="registryProtection">ON</td></tr>
+                    <tr><td>Group Policy Protection</td><td id="groupPolicyProtection">ON</td></tr>
+                    <tr><td>Services Protection</td><td id="servicesProtection">ON</td></tr>
+                </tbody>
+            </table>
+
+            <div>
+                <table class="sst-info-table">
+                    <tbody>
+                        <tr><td>Protection Status</td><td id="protectionStatus">Fully Protected</td></tr>
+                        <tr><td>Computer Name</td><td id="computerName">CAS2CHN01</td></tr>
+                        <tr><td>BIOS Version</td><td id="biosVersion">5.13</td></tr>
+                        <tr><td>Mac Address</td><td id="macAddress">00:04:5F:15:64:98, 00:04:5F:15:64:99</td></tr>
+                        <tr><td>No of HDD</td><td id="noOfHdd">2</td></tr>
+                        <tr><td>HDD Serial Number</td><td id="hddSerial">20152LAH91XG, 20482L1A6BCX</td></tr>
+                        <tr><td>Last Hot Fix</td><td id="lastHotFix">KB5004331</td></tr>
+                    </tbody>
+                </table>
+
+                <table class="sst-drive-table">
+                    <thead>
+                        <tr>
+                            <th>Drive Name</th>
+                            <th>Total Size</th>
+                            <th>Used Size</th>
+                            <th>Free Size</th>
+                            <th>Encryption Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="driveRows"></tbody>
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div id="tssManagementTab" class="sst-tab-content">
+
+        <p class="tss-note">
+            * Access request form is mandate for Enable and Generate password commands
+        </p>
+
+        <div class="tss-management-layout">
+
+            <div class="tss-left-panel">
+
+                <div class="tss-action-card">
+                    <h4>Update Mode</h4>
+                    <div class="tss-btn-row">
+                        <button class="tss-enable-btn">Enable</button>
+                        <button class="tss-disable-btn">Disable</button>
+                    </div>
+                </div>
+
+                <div class="tss-action-card blocked-app-card">
+                    <h4>Blocked App</h4>
+
+                    <label><input type="radio" name="blockedApp" /> CD/DVD ROM</label>
+                    <label><input type="radio" name="blockedApp" /> Command Prompt</label>
+                    <label><input type="radio" name="blockedApp" /> Group Policy</label>
+                    <label><input type="radio" name="blockedApp" /> Registry</label>
+                    <label><input type="radio" name="blockedApp" /> Services</label>
+
+                    <div class="tss-btn-row">
+                        <button class="tss-enable-btn">Enable</button>
+                        <button class="tss-disable-btn">Disable</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="tss-middle-panel">
+
+                <div class="tss-action-card">
+                    <h4>USB Access</h4>
+
+                    <div class="tss-form-row">
+                        <label>Duration</label>
+                        <select>
+                            <option>15 mins</option>
+                            <option>30 mins</option>
+                            <option>1 hour</option>
+                        </select>
+                    </div>
+
+                    <div class="tss-btn-row">
+                        <button class="tss-enable-btn">Enable</button>
+                        <button class="tss-disable-btn">Disable</button>
+                    </div>
+                </div>
+
+                <div class="tss-action-card">
+                    <h4>Online Admin Access</h4>
+
+                    <div class="tss-form-row">
+                        <label>Duration</label>
+                        <select>
+                            <option>15 mins</option>
+                            <option>30 mins</option>
+                            <option>1 hour</option>
+                        </select>
+                    </div>
+
+                    <div class="tss-btn-row">
+                        <button class="tss-enable-btn">Enable</button>
+                        <button class="tss-disable-btn">Disable</button>
+                    </div>
+                </div>
+
+                <div class="tss-action-card">
+                    <h4>Offline Admin Access</h4>
+
+                    <div class="tss-form-row">
+                        <label>Passcode</label>
+                        <input type="text" />
+                    </div>
+
+                    <button class="generate-password-btn">Generate Password</button>
+                </div>
+
+            </div>
+
+            <div class="tss-right-panel">
+
+                <div class="tss-action-card policy-card">
+                    <h4>Policy Update</h4>
+
+                    <div class="policy-row">
+                        <span>Policy group</span>
+                        <strong>SR7500VS-Rev1</strong>
+                    </div>
+
+                    <div class="policy-row">
+                        <span>Assigned Policy</span>
+                        <strong>1099</strong>
+                    </div>
+
+                    <div class="policy-row">
+                        <span>Policy in Terminal</span>
+                        <strong>1098</strong>
+                        <button class="sync-policy-btn">Sync Policy</button>
+                    </div>
+                </div>
+
+                <div class="tss-action-card request-card">
+                    <h4>Access Request Form</h4>
+
+                    <div class="request-row">
+                        <label>Engineer Name</label>
+                        <input type="text" />
+                    </div>
+
+                    <div class="request-row">
+                        <label>Employee Code</label>
+                        <input type="text" />
+                    </div>
+
+                    <div class="request-row">
+                        <label>Contact Number</label>
+                        <input type="text" />
+                    </div>
+
+                    <div class="request-row">
+                        <label>Call Ticket Number</label>
+                        <input type="text" />
+                    </div>
+
+                    <div class="request-row">
+                        <label>Reason</label>
+                        <input type="text" />
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div id="hdeManagementTab" class="sst-tab-content">
+
+        <div class="hde-updated-row">
+            <strong>Last Updated :</strong>
+            <span id="hdeLastUpdated">29-05-2026 10:00:01</span>
+        </div>
+
+        <div class="hde-action-row">
+            <button class="hde-btn refresh-btn">Refresh</button>
+            <button class="hde-btn encrypt-btn">Encrypt</button>
+            <button class="hde-btn automount-btn">Enable Auto Mount</button>
+            <button class="hde-btn tpm-btn">Change TPM</button>
+            <button class="hde-btn decrypt-btn">Decrypt</button>
+            <button class="hde-btn disablemount-btn">Disable Auto Mount</button>
+            <button class="hde-btn recovery-btn">View Recovery Key</button>
+        </div>
+
+        <div class="hde-recovery-row">
+            <label>Recovery Key</label>
+            <input type="text" readonly />
+        </div>
+
+        <table class="hde-management-table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Drive Name</th>
+                    <th>Total Size</th>
+                    <th>Used Size</th>
+                    <th>Free Size</th>
+                    <th>Encryption Status</th>
+                    <th>Percent</th>
+                    <th>Volume Status</th>
+                    <th>Auto Mount Status</th>
+                    <th>HDD Serial No</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td><input type="checkbox" /></td>
+                    <td>C:</td>
+                    <td>60.5</td>
+                    <td>29.2</td>
+                    <td>31.4</td>
+                    <td>Fully Encrypted</td>
+                    <td>100%</td>
+                    <td>Unlocked</td>
+                    <td>Not Applicable</td>
+                    <td>20482L1A6BCX</td>
+                </tr>
+
+                <tr>
+                    <td><input type="checkbox" /></td>
+                    <td>D:</td>
+                    <td>416.1</td>
+                    <td>22.8</td>
+                    <td>393.3</td>
+                    <td>Fully Encrypted</td>
+                    <td>100%</td>
+                    <td>Unlocked</td>
+                    <td>Enabled</td>
+                    <td>20482L1A6BCX</td>
+                </tr>
+
+                <tr>
+                    <td><input type="checkbox" /></td>
+                    <td>E:</td>
+                    <td>953.9</td>
+                    <td>30.1</td>
+                    <td>923.8</td>
+                    <td>Fully Encrypted</td>
+                    <td>100%</td>
+                    <td>Unlocked</td>
+                    <td>Enabled</td>
+                    <td>20152LAH91XG</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+    
+
+    <div id="appNotificationTab" class="sst-tab-content">
+        <div class="sst-grid-wrapper">
+            <table class="sst-notification-table">
+                <thead>
+                    <tr>
+                        <th>Event ID</th>
+                        <th>App Path</th>
+                        <th>Hash Value</th>
+                        <th>Alert Time</th>
+                        <th>Updated Time</th>
+                    </tr>
+                </thead>
+                <tbody id="appNotificationRows"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="usbNotificationTab" class="sst-tab-content">
+        <div class="sst-grid-wrapper">
+            <table class="sst-notification-table">
+                <thead>
+                    <tr>
+                        <th>Event ID</th>
+                        <th>Event Name</th>
+                        <th>Device ID</th>
+                        <th>Device Name</th>
+                        <th>USB Status</th>
+                        <th>Alert Time</th>
+                        <th>Updated Time</th>
+                    </tr>
+                </thead>
+                <tbody id="usbNotificationRows"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="jobStatusTab" class="sst-tab-content">
+        <div class="sst-grid-wrapper">
+            <table class="sst-notification-table">
+                <thead>
+                    <tr>
+                        <th>Job ID</th>
+                        <th>Job Type</th>
+                        <th>Created By</th>
+                        <th>Created Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="jobStatusRows"></tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    document.getElementById("sstSearchBtn").addEventListener("click", searchATMStatus);
+
+    async function searchATMStatus() {
+        const atmId = document.getElementById("sstSearchInput").value.trim();
+
+        if (!atmId) {
+            alert("Please enter Terminal ID");
+            return;
+        }
+
+        const response = await fetch(`/ATMStatus?handler=ATMStatus&atmId=${encodeURIComponent(atmId)}`);
+        const result = await response.json();
+
+        if (!result.success) {
+            alert(result.message);
+            return;
+        }
+
+        const data = result.data;
+
+        setInputValue("sstTerminalId", data.atmid);
+        setInputValue("sstLocation", data.location);
+        setInputValue("sstTerminalIp", data.terminalIP);
+        setInputValue("sstState", data.state);
+        setInputValue("sstNatIp", data.natIP);
+        setInputValue("sstRegion", data.region);
+
+        const formattedDate = formatDateTime(data.lastUpdated);
+        setInputValue("sstLastModified", formattedDate);
+
+        setText("sstLastUpdated", formattedDate);
+        setText("hdeLastUpdated", formattedDate);
+
+        setText("terminalStatus", data.terminalStatus);
+        setText("protectionStatus", data.protectionStatus);
+
+        setText("processor", data.processor);
+        setText("motherBoard", data.motherBoard);
+        setText("ram", data.ram);
+        setText("osName", data.osName);
+        setText("osVersion", data.osVersion);
+        setText("clientVersion", data.clientVersion);
+        setText("policyVersion", data.policyVersion);
+
+        setText("hipaProtection", data.hipaProtection);
+        setText("cdProtection", data.cddvdProtection);
+        setText("usbProtection", data.usbProtection);
+        setText("powerShellProtection", data.powerShellProtection);
+        setText("autoRunProtection", data.autoRunProtection);
+        setText("cmdProtection", data.commandPromptProtection);
+        setText("controlPanelProtection", data.controlPanelProtection);
+        setText("registryProtection", data.registryProtection);
+        setText("groupPolicyProtection", data.groupPolicyProtection);
+        setText("servicesProtection", data.servicesProtection);
+
+        setText("computerName", data.computerName);
+        setText("biosVersion", data.biosVersion);
+        setText("macAddress", data.macAddress);
+        setText("noOfHdd", data.noOfHDD);
+        setText("hddSerial", data.hddSerialNumber);
+        setText("lastHotFix", data.lastHotFix);
+
+        loadDriveRows(data);
+    }
+
+    function setText(id, value) {
+        const element = document.getElementById(id);
+        if (element) {
+            element.innerText = value ?? "-";
+        }
+    }
+
+    function setInputValue(id, value) {
+        const element = document.getElementById(id);
+        if (element) {
+            element.value = value ?? "-";
+        }
+    }
+
+    function formatDateTime(value) {
+
+        if (!value)
+            return "-";
+
+        const date = new Date(value);
+
+        return date.toLocaleString("en-IN", {
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit"
+        });
+    }
+
+    function loadDriveRows(data) {
+        const tbody = document.getElementById("driveRows");
+
+        if (!tbody) return;
+
+        tbody.innerHTML = `
+            <tr>
+                <td>C:</td>
+                <td>${data.driveC_TotalSize ?? "-"}</td>
+                <td>${data.driveC_UsedSize ?? "-"}</td>
+                <td>${data.driveC_FreeSize ?? "-"}</td>
+                <td>${data.driveC_EncryptionStatus ?? "-"}</td>
+            </tr>
+            <tr>
+                <td>D:</td>
+                <td>${data.driveD_TotalSize ?? "-"}</td>
+                <td>${data.driveD_UsedSize ?? "-"}</td>
+                <td>${data.driveD_FreeSize ?? "-"}</td>
+                <td>${data.driveD_EncryptionStatus ?? "-"}</td>
+            </tr>
+            <tr>
+                <td>E:</td>
+                <td>${data.driveE_TotalSize ?? "-"}</td>
+                <td>${data.driveE_UsedSize ?? "-"}</td>
+                <td>${data.driveE_FreeSize ?? "-"}</td>
+                <td>${data.driveE_EncryptionStatus ?? "-"}</td>
+            </tr>
+        `;
+    }
+</script>

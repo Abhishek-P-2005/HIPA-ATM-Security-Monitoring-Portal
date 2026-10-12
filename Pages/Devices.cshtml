@@ -1,0 +1,133 @@
+﻿@page
+@model ATMMonitoringWebApp.Pages.DevicesModel
+@attribute [Microsoft.AspNetCore.Authorization.Authorize]
+
+@{
+    ViewData["Title"] = "Devices";
+}
+
+<div class="dashboard-container compact-page">
+
+    <div class="page-title-row compact-title">
+        <div>
+            <h1>Device Management</h1>
+            <p>Registered ATM devices, connection status, encryption status, and location details</p>
+        </div>
+
+        <div class="page-actions">
+            <button class="btn-primary">Add Device</button>
+        </div>
+    </div>
+
+    <div class="summary-grid compact-summary">
+        <div class="summary-card"><h3>Total Devices</h3><h2>3570</h2><p>Registered devices</p></div>
+        <div class="summary-card green-card"><h3>Online</h3><h2>3091</h2><p>Connected devices</p></div>
+        <div class="summary-card red-card"><h3>Offline</h3><h2>479</h2><p>Disconnected devices</p></div>
+        <div class="summary-card blue-card"><h3>Regions</h3><h2>4</h2><p>North, South, East, West</p></div>
+    </div>
+
+    <div class="dashboard-panel compact-panel">
+        <div class="device-toolbar compact-toolbar">
+            <input type="text" placeholder="Search by ATM ID, location, IP address..." />
+            <select>
+                <option>All Regions</option>
+                <option>North</option>
+                <option>South</option>
+                <option>East</option>
+                <option>West</option>
+            </select>
+            <select>
+                <option>All Status</option>
+                <option>Online</option>
+                <option>Offline</option>
+            </select>
+        </div>
+
+        <h3>ATM Device List</h3>
+
+        <table class="dashboard-table compact-table">
+            <thead>
+                <tr>
+                    <th>ATM ID</th>
+                    <th>Device Type</th>
+                    <th>Location</th>
+                    <th>State</th>
+                    <th>Region</th>
+                    <th>IP Address</th>
+                    <th>Status</th>
+                    <th>Encryption</th>
+                    <th>Last Updated</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>ATM-PB-001</td>
+                    <td>CRM</td>
+                    <td>Amritsar</td>
+                    <td>Punjab</td>
+                    <td>North</td>
+                    <td>10.123.9.179</td>
+                    <td><span class="badge badge-online">Online</span></td>
+                    <td>Fully Encrypted</td>
+                    <td>21-05-2026 13:11</td>
+                    <td><a class="table-link" href="/ATMStatus?atmId=ATM-PB-001">View</a></td>
+                </tr>
+
+                <tr>
+                    <td>ATM-DL-014</td>
+                    <td>ATM</td>
+                    <td>Delhi</td>
+                    <td>Delhi</td>
+                    <td>North</td>
+                    <td>10.122.4.108</td>
+                    <td><span class="badge badge-offline">Offline</span></td>
+                    <td>Partially Encrypted</td>
+                    <td>21-05-2026 12:48</td>
+                    <td><a class="table-link" href="/ATMStatus?atmId=ATM-DL-014">View</a></td>
+                </tr>
+
+                <tr>
+                    <td>ATM-MH-022</td>
+                    <td>CRM</td>
+                    <td>Mumbai</td>
+                    <td>Maharashtra</td>
+                    <td>West</td>
+                    <td>10.121.8.221</td>
+                    <td><span class="badge badge-online">Online</span></td>
+                    <td>Fully Encrypted</td>
+                    <td>21-05-2026 13:05</td>
+                    <td><a class="table-link" href="/ATMStatus?atmId=ATM-MH-022">View</a></td>
+                </tr>
+
+                <tr>
+                    <td>ATM-TN-031</td>
+                    <td>ATM</td>
+                    <td>Chennai</td>
+                    <td>Tamil Nadu</td>
+                    <td>South</td>
+                    <td>10.120.7.144</td>
+                    <td><span class="badge badge-online">Online</span></td>
+                    <td>Fully Encrypted</td>
+                    <td>21-05-2026 13:09</td>
+                    <td><a class="table-link" href="/ATMStatus?atmId=ATM-TN-031">View</a></td>
+                </tr>
+
+                <tr>
+                    <td>ATM-WB-008</td>
+                    <td>CRM</td>
+                    <td>Kolkata</td>
+                    <td>West Bengal</td>
+                    <td>East</td>
+                    <td>10.119.6.091</td>
+                    <td><span class="badge badge-offline">Offline</span></td>
+                    <td>Not Encrypted</td>
+                    <td>21-05-2026 11:32</td>
+                    <td><a class="table-link" href="/ATMStatus?atmId=ATM-WB-008">View</a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>

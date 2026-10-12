@@ -1,0 +1,40 @@
+﻿@page
+@model ATMMonitoringWebApp.Pages.UserManagement.RolesModel
+
+@{
+    ViewData["Title"] = "Roles";
+}
+
+<div class="roles-page">
+    <div class="roles-title-bar">
+        USER PROFILING
+    </div>
+
+    <div class="roles-control-row">
+        <label>Role :</label>
+
+        <select id="roleSelect">
+            <option>Super Admin</option>
+            <option>Admin</option>
+            <option>User</option>
+            <option>Guest</option>
+        </select>
+
+        <button type="button" id="viewRoleBtn" class="role-action-btn">View</button>
+        <button type="button" id="updateRoleBtn" class="role-action-btn">Update</button>
+    </div>
+
+    <div class="roles-table-wrapper">
+        <table class="roles-permission-table">
+            <thead>
+                <tr>
+                    <th>Module</th>
+                    <th>Menu View</th>
+                </tr>
+            </thead>
+            <tbody id="rolesPermissionBody"></tbody>
+        </table>
+    </div>
+
+    <div style="height:5px;"></div>
+</div>

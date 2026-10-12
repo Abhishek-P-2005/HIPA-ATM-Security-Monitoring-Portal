@@ -1,0 +1,138 @@
+﻿@page
+@model ATMMonitoringWebApp.Pages.DashboardModel
+
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="dashboard-container compact-page dashboard-fit-page">
+
+    
+
+    <div class="sir-dashboard-grid">
+
+        <div class="sir-card sir-chart-card">
+            <h3>Connection Status</h3>
+
+            <div class="sir-chart-row">
+                <div class="donut-chart"
+                     style="background: conic-gradient(
+                    #c51622 0deg @(Model.ConnectionPercentage * 3.6)deg,
+                    #8d91b8 @(Model.ConnectionPercentage * 3.6)deg 360deg);">
+                    <span>@Model.ConnectionPercentage%</span>
+                </div>
+
+                <div class="sir-legend">
+                    <div>
+                        <span class="legend-box connected-color"></span>
+                        <label>Connected</label>
+                        <strong>@Model.ConnectedATMs</strong>
+
+                    </div>
+
+                    <div>
+                        <span class="legend-box disconnected-color"></span>
+                        <label>Disconnected</label>
+                        <strong>@Model.DisconnectedATMs</strong>
+                    </div>
+
+                    <div>
+                        <span></span>
+                        <label>Total</label>
+                        <strong>@Model.TotalATMs</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="sir-card sir-chart-card">
+            <h3>Protection Status</h3>
+
+            <div class="sir-chart-row">
+                <div class="donut-chart"
+                     style="background: conic-gradient(
+                    #c51622 0deg @(Model.ProtectionPercentage * 3.6)deg,
+                    #8d91b8 @(Model.ProtectionPercentage * 3.6)deg 360deg);">
+                    <span>@Model.ProtectionPercentage%</span>
+                </div>
+
+                <div class="sir-legend">
+                    <div>
+                        <span class="legend-box protected-color"></span>
+                        <label>Fully Protected</label>
+                        <strong>@Model.FullyProtected</strong>
+                    </div>
+
+                    <div>
+                        <span class="legend-box not-protected-color"></span>
+                        <label>Not Protected</label>
+                        <strong>@Model.NotProtected</strong>
+                    </div>
+
+                    <div>
+                        <span></span>
+                        <label>Total</label>
+                        <strong>@Model.TotalATMs</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="sir-card sir-table-card">
+            <div class="sir-card-title">TSS Status</div>
+
+            <table class="sir-status-table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>ON</th>
+                        <th>OFF</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr><td>HIPA Protection</td><td class="sir-green">@Model.HIPAOn</td><td class="sir-red">@Model.HIPAOff</td><td>@Model.TotalATMs</td></tr>
+                    <tr><td>CD/DVD Protection</td><td class="sir-green">@Model.CDOn</td><td class="sir-red">@Model.CDOff</td><td>@Model.TotalATMs</td></tr>
+                    <tr><td>USB Protection</td><td class="sir-green">@Model.USBOn</td><td class="sir-red">@Model.USBOff</td><td>@Model.TotalATMs</td></tr>
+                    <tr><td>PowerShell Protection</td><td class="sir-green">@Model.PowerShellOn</td><td class="sir-red">@Model.PowerShellOff</td><td>@Model.TotalATMs</td></tr>
+                    <tr><td>Auto Run Protection</td><td class="sir-green">@Model.AutoRunOn</td><td class="sir-red">@Model.AutoRunOff</td><td>@Model.TotalATMs</td></tr>
+                    <tr><td>Command Prompt</td><td class="sir-green">@Model.CommandPromptOn</td><td class="sir-red">@Model.CommandPromptOff</td><td>@Model.TotalATMs</td></tr>
+                    <tr><td>Control Panel</td><td class="sir-green">@Model.ControlPanelOn</td><td class="sir-red">@Model.ControlPanelOff</td><td>@Model.TotalATMs</td></tr>
+                    <tr><td>Registry</td><td class="sir-green">@Model.RegistryOn</td><td class="sir-red">@Model.RegistryOff</td><td>@Model.TotalATMs</td></tr>
+                    <tr><td>Group Policy</td><td class="sir-green">@Model.GroupPolicyOn</td><td class="sir-red">@Model.GroupPolicyOff</td><td>@Model.TotalATMs</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="sir-right-column">
+
+            <div class="sir-card sir-small-card">
+                <div class="sir-card-title">HDE Status</div>
+
+                <table class="sir-status-table hde-table">
+                    <tbody>
+                        <tr><td>Encrypted</td><td class="sir-green">@Model.HDEEncrypted</td></tr>
+                        <tr><td>Partially Encrypted</td><td class="sir-orange">@Model.HDEPartiallyEncrypted</td></tr>
+                        <tr><td>Not Encrypted</td><td class="sir-red">@Model.HDENotEncrypted</td></tr>
+                        <tr><td>Total</td><td>@Model.TotalATMs</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="sir-card sir-small-card alert-compact-card">
+                <div class="sir-card-title">Alert Status</div>
+
+                <table class="sir-status-table alert-table">
+                    <tbody>
+                        <tr><td>Unauthorized App</td><td>@Model.UnauthorizedAppCount</td></tr>
+                        <tr><td>Unauthorized USB</td><td>@Model.UnauthorizedUSBCount</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

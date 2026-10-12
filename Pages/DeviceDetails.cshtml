@@ -1,0 +1,229 @@
+﻿@page
+@model ATMMonitoringWebApp.Pages.DeviceDetailsModel
+@attribute [Microsoft.AspNetCore.Authorization.Authorize]
+
+@{
+    ViewData["Title"] = "Device Details";
+}
+
+<div class="dashboard-container">
+
+    <div class="page-title-row">
+        <div>
+            <h1>Device Details</h1>
+            <p>Detailed ATM device, hardware, encryption, and volume information</p>
+        </div>
+
+        <div class="page-actions">
+            <button class="btn-secondary">Refresh</button>
+            <a class="btn-primary page-button-link" asp-page="/Devices">Back to Devices</a>
+        </div>
+    </div>
+
+    <div class="device-detail-header">
+        <div>
+            <span class="detail-label">Selected Device</span>
+            <h2>ATM-PB-001</h2>
+            <p>Amritsar, Punjab · North Region</p>
+        </div>
+
+        <div class="device-status-box">
+            <span class="badge badge-online">Online</span>
+            <span class="badge badge-secure">Fully Encrypted</span>
+        </div>
+    </div>
+
+    <div class="detail-grid">
+
+        <div class="dashboard-panel">
+            <h3>Device Information</h3>
+
+            <div class="info-row">
+                <span>ATM ID</span>
+                <strong>ATM-PB-001</strong>
+            </div>
+
+            <div class="info-row">
+                <span>Device Type</span>
+                <strong>CRM</strong>
+            </div>
+
+            <div class="info-row">
+                <span>Location</span>
+                <strong>Amritsar</strong>
+            </div>
+
+            <div class="info-row">
+                <span>State</span>
+                <strong>Punjab</strong>
+            </div>
+
+            <div class="info-row">
+                <span>Region</span>
+                <strong>North</strong>
+            </div>
+
+            <div class="info-row">
+                <span>Device Status</span>
+                <strong class="success-text">Active</strong>
+            </div>
+        </div>
+
+        <div class="dashboard-panel">
+            <h3>Network Information</h3>
+
+            <div class="info-row">
+                <span>IP Address</span>
+                <strong>10.123.9.179</strong>
+            </div>
+
+            <div class="info-row">
+                <span>Port No</span>
+                <strong>8002</strong>
+            </div>
+
+            <div class="info-row">
+                <span>Last Updated</span>
+                <strong>21-05-2026 13:11</strong>
+            </div>
+
+            <div class="info-row">
+                <span>Connection Status</span>
+                <strong class="success-text">Connected</strong>
+            </div>
+
+            <div class="info-row">
+                <span>Recovery Key</span>
+                <strong>DEMO-KEY-XXXX-XXXX</strong>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="dashboard-panel">
+        <h3>System & Hardware Information</h3>
+
+        <div class="hardware-grid">
+            <div class="hardware-item">
+                <span>Computer Name</span>
+                <strong>HARMK051111</strong>
+            </div>
+
+            <div class="hardware-item">
+                <span>Operating System</span>
+                <strong>Microsoft Windows 10 IoT Enterprise LTSC</strong>
+            </div>
+
+            <div class="hardware-item">
+                <span>OS Version</span>
+                <strong>10.0.19044</strong>
+            </div>
+
+            <div class="hardware-item">
+                <span>BIOS Version</span>
+                <strong>5.13</strong>
+            </div>
+
+            <div class="hardware-item">
+                <span>Motherboard</span>
+                <strong>DURA-H310M</strong>
+            </div>
+
+            <div class="hardware-item">
+                <span>RAM</span>
+                <strong>8.0 GB</strong>
+            </div>
+
+            <div class="hardware-item">
+                <span>No. of HDD</span>
+                <strong>2</strong>
+            </div>
+
+            <div class="hardware-item">
+                <span>MAC Address</span>
+                <strong>00:04:5F:16:64:98</strong>
+            </div>
+        </div>
+    </div>
+
+    <div class="dashboard-panel">
+        <h3>Volume Information</h3>
+
+        <table class="dashboard-table">
+            <thead>
+                <tr>
+                    <th>Drive</th>
+                    <th>Total Size</th>
+                    <th>Used Size</th>
+                    <th>Free Size</th>
+                    <th>Volume Status</th>
+                    <th>Lock Status</th>
+                    <th>Auto Mount</th>
+                    <th>HDD Serial No</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>D:</td>
+                    <td>466.1 GB</td>
+                    <td>72.8 GB</td>
+                    <td>393.3 GB</td>
+                    <td><span class="badge badge-secure">Fully Encrypted</span></td>
+                    <td>Unlocked</td>
+                    <td>Automatic Enabled</td>
+                    <td>204621A8BC</td>
+                </tr>
+
+                <tr>
+                    <td>E:</td>
+                    <td>931.5 GB</td>
+                    <td>30.6 GB</td>
+                    <td>901.2 GB</td>
+                    <td><span class="badge badge-secure">Fully Encrypted</span></td>
+                    <td>Unlocked</td>
+                    <td>Automatic Enabled</td>
+                    <td>2052AA43C0</td>
+                </tr>
+
+                <tr>
+                    <td>C:</td>
+                    <td>80.6 GB</td>
+                    <td>39.2 GB</td>
+                    <td>41.4 GB</td>
+                    <td><span class="badge badge-secure">Fully Encrypted</span></td>
+                    <td>Unlocked</td>
+                    <td>Automatic Enabled</td>
+                    <td>204621A8DC</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="dashboard-panel">
+        <h3>Protection Summary</h3>
+
+        <div class="protection-grid">
+            <div class="protection-card">
+                <span>HIPA Protection</span>
+                <strong class="success-text">ON</strong>
+            </div>
+
+            <div class="protection-card">
+                <span>USB Protection</span>
+                <strong class="success-text">ON</strong>
+            </div>
+
+            <div class="protection-card">
+                <span>Registry Protection</span>
+                <strong class="success-text">ON</strong>
+            </div>
+
+            <div class="protection-card">
+                <span>PowerShell Protection</span>
+                <strong class="danger-text">OFF</strong>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,55 @@
+﻿@page
+@model ATMMonitoringWebApp.Pages.UserManagement.UserFormModel
+
+@{
+    ViewData["Title"] = "User Form";
+}
+
+<div class="user-form-page">
+    <div class="user-form-card">
+
+        <h2>@(Model.IsEditMode ? "Edit User" : "Add User")</h2>
+
+        <form method="post" autocomplete="off">
+            <input type="hidden" asp-for="Input.Id" />
+
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <label>Full Name</label>
+            <input asp-for="Input.FullName" required />
+
+            <label>Email</label>
+            <input asp-for="Input.Email" type="email" required />
+
+            <label>Username</label>
+            <input asp-for="Input.Username" required />
+
+            <label>Password</label>
+            <input asp-for="Input.Password" type="password" autocomplete="new-password" />
+
+            <label>Status</label>
+            <select asp-for="Input.Status" required>
+                <option>Active</option>
+                <option>Inactive</option>
+                <option>Banned</option>
+                <option>Pending</option>
+                <option>Suspended</option>
+            </select>
+
+            <label>Role</label>
+            <select asp-for="Input.Role" required>
+                @foreach (var role in Model.Roles)
+                {
+                    <option value="@role">@role</option>
+                }
+            </select>
+
+            <div class="user-form-actions">
+                <button type="submit">Save User</button>
+                <a asp-page="/UserManagement/Users">Cancel</a>
+            </div>
+
+        </form>
+
+    </div>
+</div>

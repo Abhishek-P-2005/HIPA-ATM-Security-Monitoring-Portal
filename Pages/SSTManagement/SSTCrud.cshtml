@@ -1,0 +1,243 @@
+﻿@page
+@model ATMMonitoringWebApp.Pages.SSTManagement.SSTCrudModel
+@{
+    ViewData["Title"] = "SST Crud";
+}
+
+<div class="sst-crud-page">
+
+    <div class="sst-crud-title">
+        <span class="sst-icon">🖥️</span>
+        <span>ATM INFO</span>
+    </div>
+
+    <form method="get" class="sst-crud-search-row">
+        <label>ATM ID:</label>
+        <input type="text"
+               id="sstCrudSearch"
+               name="SearchATMID"
+               value="@(Model.Input.ATMID != "" ? Model.Input.ATMID : Model.SearchATMID)"
+               placeholder="Enter ATM ID" />
+
+        <button type="submit" id="sstCrudSearchBtn" class="sst-red-btn">
+            Search
+        </button>
+    </form>
+
+    <form method="post" id="sstCrudForm">
+
+        <input type="hidden" asp-for="Input.Id" />
+        <input type="hidden" asp-for="Input.ATMID" id="hiddenATMID" />
+
+        <div class="sst-crud-form">
+
+            <div class="sst-crud-col">
+
+                <div class="sst-crud-field">
+                    <label>Bank :</label>
+                    <select asp-for="Input.Bank" id="bank">
+                        <option>IDBI Bank</option>
+                        <option>HDFC Bank</option>
+                        <option>Union Bank of India</option>
+                        <option>State Bank of India</option>
+                    </select>
+                </div>
+
+                <div class="sst-crud-field">
+                    <label>IP :</label>
+                    <input asp-for="Input.IP" id="ip" />
+                </div>
+
+                <div class="sst-crud-field">
+                    <label>ATMType :</label>
+                    <select asp-for="Input.ATMType" id="atmType">
+                        <option>CRM</option>
+                        <option>ATM</option>
+                        <option>BNA</option>
+                    </select>
+                </div>
+
+                <div class="sst-crud-field">
+                    <label>Zone :</label>
+                    <select asp-for="Input.Zone" id="zone">
+                        <option>Select Zone</option>
+                        <option>South</option>
+                        <option>North</option>
+                        <option>East</option>
+                        <option>West</option>
+                    </select>
+                </div>
+
+                <div class="sst-crud-field">
+                    <label>State :</label>
+                    <select asp-for="Input.State" id="state">
+                        <option>Select State</option>
+                        <option>Tamil Nadu</option>
+                        <option>Karnataka</option>
+                        <option>Maharashtra</option>
+                        <option>Delhi</option>
+                    </select>
+                </div>
+
+                <div class="sst-crud-field">
+                    <label>Default Policy :</label>
+                    <select asp-for="Input.DefaultPolicy" id="defaultPolicy">
+                        <option>Select Policy</option>
+                        <option>SR7500VS-Rev1</option>
+                        <option>HIPA-Default-Policy</option>
+                        <option>USB-Restricted-Policy</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="sst-crud-col">
+
+                <div class="sst-crud-field">
+                    <label>Port :</label>
+                    <input asp-for="Input.Port" id="port" />
+                </div>
+
+                <div class="sst-crud-field">
+                    <label>Manufacturer :</label>
+                    <select asp-for="Input.Manufacturer" id="manufacturer">
+                        <option>HITACHI</option>
+                        <option>NCR</option>
+                        <option>Diebold</option>
+                        <option>AGS</option>
+                    </select>
+                </div>
+
+                <div class="sst-crud-field">
+                    <label>Location :</label>
+                    <input asp-for="Input.Location" id="location" />
+                </div>
+
+                <div class="sst-crud-field">
+                    <label>City :</label>
+                    <select asp-for="Input.City" id="city">
+                        <option>Select City</option>
+                        <option>Chennai</option>
+                        <option>Bengaluru</option>
+                        <option>Mumbai</option>
+                        <option>Delhi</option>
+                    </select>
+                </div>
+
+                <div class="sst-crud-field">
+                    <label>ATM Status :</label>
+                    <input asp-for="Input.Status" id="atmStatus" readonly />
+                </div>
+
+            </div>
+
+            <div class="sst-crud-col">
+
+                <div class="sst-crud-field address-field">
+                    <label>Address :</label>
+                    <textarea asp-for="Input.Address" id="address"></textarea>
+                </div>
+
+                <div class="sst-crud-field">
+                    <label>Branch SOL ID :</label>
+                    <input asp-for="Input.BranchSOLID" id="branchSolId" />
+                </div>
+
+                <div class="sst-crud-field">
+                    <label>Branch e-Mail ID :</label>
+                    <input asp-for="Input.BranchEmail" id="branchEmail" type="email" />
+                </div>
+
+                <div class="sst-crud-field">
+                    <label>Serial No :</label>
+                    <input asp-for="Input.SerialNo" id="serialNo" />
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="sst-crud-button-row">
+            <button type="submit"
+                    id="sstAddBtn"
+                    class="sst-red-btn"
+                    asp-page-handler="Add">
+                ADD
+            </button>
+
+            <button type="submit"
+                    id="sstEditBtn"
+                    class="sst-red-btn"
+                    asp-page-handler="Edit">
+                EDIT
+            </button>
+
+            <button type="submit"
+                    id="sstDeleteBtn"
+                    class="sst-red-btn"
+                    asp-page-handler="Delete">
+                DELETE
+            </button>
+
+            <a asp-page="/SSTManagement/SSTCrud"
+               id="sstClearBtn"
+               class="sst-dark-btn">
+                CLEAR
+            </a>
+        </div>
+
+    </form>
+
+    <div class="sst-crud-table-section">
+        <table class="sst-crud-table">
+            <thead>
+                <tr>
+                    <th>ATM ID</th>
+                    <th>Bank</th>
+                    <th>IP</th>
+                    <th>ATM Type</th>
+                    <th>Zone</th>
+                    <th>State</th>
+                    <th>City</th>
+                    <th>Status</th>
+                    <th>Manufacturer</th>
+                </tr>
+            </thead>
+
+            <tbody id="sstCrudTableBody">
+                @foreach (var atm in Model.ATMs)
+                {
+                    <tr>
+                        <td>@atm.ATMID</td>
+                        <td>@atm.Bank</td>
+                        <td>@atm.IP</td>
+                        <td>@atm.ATMType</td>
+                        <td>@atm.Zone</td>
+                        <td>@atm.State</td>
+                        <td>@atm.City</td>
+                        <td>@atm.Status</td>
+                        <td>@atm.Manufacturer</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+@section Scripts {
+    <script>
+        const searchBox = document.getElementById("sstCrudSearch");
+        const hiddenATMID = document.getElementById("hiddenATMID");
+
+        function syncATMID() {
+            if (searchBox && hiddenATMID) {
+                hiddenATMID.value = searchBox.value.trim().toUpperCase();
+            }
+        }
+
+        document.getElementById("sstAddBtn")?.addEventListener("click", syncATMID);
+        document.getElementById("sstEditBtn")?.addEventListener("click", syncATMID);
+        document.getElementById("sstDeleteBtn")?.addEventListener("click", syncATMID);
+    </script>
+}

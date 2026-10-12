@@ -1,0 +1,82 @@
+﻿@page
+@model IndexModel
+
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="home-container">
+
+    <section class="hero-section">
+        <div>
+            <span class="hero-tag">Offline ATM Monitoring Prototype</span>
+
+            <h1>ATM Monitoring & Protection Portal</h1>
+
+            <p>
+                A unified local web application for monitoring ATM connectivity,
+                device health, encryption status, HIPA protection, ATM-level status,
+                and operational reports.
+            </p>
+
+            <div class="hero-actions">
+                <a class="btn-primary page-button-link" asp-page="/Dashboard">Open Dashboard</a>
+                <a class="btn-secondary page-button-link dark-link" asp-page="/Devices">View Devices</a>
+            </div>
+        </div>
+
+        <div class="hero-card">
+            <h3>System Snapshot</h3>
+
+            <div class="snapshot-row">
+                <span>Total Devices</span>
+                <strong>3570</strong>
+            </div>
+
+            <div class="snapshot-row">
+                <span>Connected</span>
+                <strong class="success-text">3091</strong>
+            </div>
+
+            <div class="snapshot-row">
+                <span>Disconnected</span>
+                <strong class="danger-text">479</strong>
+            </div>
+
+            <div class="snapshot-row">
+                <span>HIPA Alerts</span>
+                <strong class="warning-text">4</strong>
+            </div>
+        </div>
+    </section>
+
+    <section class="home-feature-grid">
+
+        <a class="home-feature-card" asp-page="/Dashboard">
+            <h3>Dashboard</h3>
+            <p>View ATM connectivity, encryption status, and security summary.</p>
+        </a>
+
+        <a class="home-feature-card" asp-page="/Devices">
+            <h3>Device Management</h3>
+            <p>Search, filter, and review registered ATM terminals.</p>
+        </a>
+
+        <a class="home-feature-card" asp-page="/HIPAStatus">
+            <h3>HIPA Protection</h3>
+            <p>Monitor alerts, terminal status, policy sync, and protection modules.</p>
+        </a>
+
+        <a class="home-feature-card" href="/ATMStatus?atmId=ATM-PB-001">
+            <h3>ATM Status</h3>
+            <p>Check ATM-wise TSS, blocked apps, USB events, system info, and volumes.</p>
+        </a>
+
+        <a class="home-feature-card" asp-page="/Reports">
+            <h3>Reports</h3>
+            <p>Generate and download operational and security reports.</p>
+        </a>
+
+    </section>
+
+</div>

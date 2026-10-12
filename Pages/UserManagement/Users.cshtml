@@ -1,0 +1,203 @@
+﻿@page
+@model ATMMonitoringWebApp.Pages.UserManagement.UsersModel
+
+@{
+    ViewData["Title"] = "Users";
+}
+
+<div class="user-mgmt-page">
+
+    <form method="get" class="user-toolbar" id="userFilterForm">
+
+        <input type="text"
+               name="Search"
+               id="userSearchBox"
+               value="@Model.Search"
+               placeholder="Search"
+               autocomplete="off" />
+
+        <select name="RoleFilter" onchange="this.form.submit()">
+            <option value="">Role</option>
+            <option value="Super Admin" selected="@(Model.RoleFilter == "Super Admin")">Super Admin</option>
+            <option value="Admin" selected="@(Model.RoleFilter == "Admin")">Admin</option>
+            <option value="User" selected="@(Model.RoleFilter == "User")">User</option>
+            <option value="Guest" selected="@(Model.RoleFilter == "Guest")">Guest</option>
+        </select>
+
+        <select name="StatusFilter" onchange="this.form.submit()">
+            <option value="">Status</option>
+            <option value="Active" selected="@(Model.StatusFilter == "Active")">Active</option>
+            <option value="Inactive" selected="@(Model.StatusFilter == "Inactive")">Inactive</option>
+            <option value="Banned" selected="@(Model.StatusFilter == "Banned")">Banned</option>
+            <option value="Pending" selected="@(Model.StatusFilter == "Pending")">Pending</option>
+            <option value="Suspended" selected="@(Model.StatusFilter == "Suspended")">Suspended</option>
+        </select>
+
+        <select name="DateFilter" onchange="this.form.submit()">
+            <option value="">Date</option>
+            <option value="newest" selected="@(Model.DateFilter == "newest")">Newest Created</option>
+            <option value="oldest" selected="@(Model.DateFilter == "oldest")">Oldest Created</option>
+            <option value="modifiedNewest" selected="@(Model.DateFilter == "modifiedNewest")">Recently Modified</option>
+        </select>
+
+        <button type="button" class="um-export-btn" onclick="exportUsersCsv()">Export</button>
+
+        <a class="um-add-btn" asp-page="/UserManagement/UserForm">
+            + Add User
+        </a>
+    </form>
+
+    <div class="user-table-card">
+        <table class="user-table">
+            <thead>
+                <tr>
+                    <th>Full Name</th>
+                    <th>Email</th>
+                    <th>Username</th>
+                    <th>Status</th>
+                    <th>Role</th>
+                    <th>Created Date</th>
+                    <th>Modified Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var user in Model.Users)
+                {
+                    <tr>
+                        <td>@user.FullName</td>
+                        <td>@user.Email</td>
+                        <td>@user.Username</td>
+                        <td>
+                            <span class="status-badge status-@user.Status.ToLower()">
+                                @user.Status
+                            </span>
+                        </td>
+                        <td>
+                            <span class="role-badge role-@user.Role.Replace(" ", "").ToLower()">
+                                @user.Role
+                            </span>
+                        </td>
+                        <td>@user.CreatedDate.ToString("dd MMM yyyy")</td>
+                        <td>@user.ModifiedDate.ToString("dd MMM yyyy")</td>
+                        <td>
+                            <a asp-page="/UserManagement/UserForm"
+                               asp-route-id="@user.Id">
+                                Edit
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="user-pagination">
+
+        <form method="get" class="rows-form">
+            <input type="hidden" name="Search" value="@Model.Search" />
+            <input type="hidden" name="RoleFilter" value="@Model.RoleFilter" />
+            <input type="hidden" name="StatusFilter" value="@Model.StatusFilter" />
+            <input type="hidden" name="DateFilter" value="@Model.DateFilter" />
+
+            <span>Rows per page</span>
+
+            <select name="RowsPerPage" onchange="this.form.submit()">
+                <option value="5" selected="@(Model.RowsPerPage == 5)">5</option>
+                <option value="10" selected="@(Model.RowsPerPage == 10)">10</option>
+                <option value="15" selected="@(Model.RowsPerPage == 15)">15</option>
+                <option value="20" selected="@(Model.RowsPerPage == 20)">20</option>
+                <option value="25" selected="@(Model.RowsPerPage == 25)">25</option>
+                <option value="50" selected="@(Model.RowsPerPage == 50)">50</option>
+            </select>
+
+            <span>of @Model.TotalUsers users</span>
+        </form>
+
+        <div class="page-buttons">
+            @if (Model.CurrentPage > 1)
+            {
+                <a asp-page="/UserManagement/Users"
+                   asp-route-Search="@Model.Search"
+                   asp-route-RoleFilter="@Model.RoleFilter"
+                   asp-route-StatusFilter="@Model.StatusFilter"
+                   asp-route-DateFilter="@Model.DateFilter"
+                   asp-route-RowsPerPage="@Model.RowsPerPage"
+                   asp-route-CurrentPage="@(Model.CurrentPage - 1)">
+                    ‹
+                </a>
+            }
+
+            @for (int i = 1; i <= Model.TotalPages; i++)
+            {
+                <a class="@(i == Model.CurrentPage ? "active-page-btn" : "")"
+                   asp-page="/UserManagement/Users"
+                   asp-route-Search="@Model.Search"
+                   asp-route-RoleFilter="@Model.RoleFilter"
+                   asp-route-StatusFilter="@Model.StatusFilter"
+                   asp-route-DateFilter="@Model.DateFilter"
+                   asp-route-RowsPerPage="@Model.RowsPerPage"
+                   asp-route-CurrentPage="@i">
+                    @i
+                </a>
+            }
+
+            @if (Model.CurrentPage < Model.TotalPages)
+            {
+                <a asp-page="/UserManagement/Users"
+                   asp-route-Search="@Model.Search"
+                   asp-route-RoleFilter="@Model.RoleFilter"
+                   asp-route-StatusFilter="@Model.StatusFilter"
+                   asp-route-DateFilter="@Model.DateFilter"
+                   asp-route-RowsPerPage="@Model.RowsPerPage"
+                   asp-route-CurrentPage="@(Model.CurrentPage + 1)">
+                    ›
+                </a>
+            }
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts {
+    <script>
+        const searchBox = document.getElementById("userSearchBox");
+        const form = document.getElementById("userFilterForm");
+
+        let searchTimer;
+
+        searchBox.addEventListener("input", function () {
+            clearTimeout(searchTimer);
+
+            searchTimer = setTimeout(function () {
+                form.submit();
+            }, 400);
+        });
+
+        function exportUsersCsv() {
+                let rows = [];
+                rows.push(["Full Name", "Email", "Username", "Status", "Role", "Created Date", "Modified Date"]);
+
+                document.querySelectorAll(".user-table tbody tr").forEach(row => {
+                    let cols = Array.from(row.querySelectorAll("td"))
+                        .slice(0, 7)
+                        .map(td => `"${td.innerText.trim().replace(/"/g, '""')}"`);
+
+                    rows.push(cols);
+                });
+
+                let csv = rows.map(r => r.join(",")).join("\n");
+                let blob = new Blob([csv], { type: "text/csv" });
+                let url = window.URL.createObjectURL(blob);
+
+                let a = document.createElement("a");
+                a.href = url;
+                a.download = "HIPA_Users.csv";
+                a.click();
+
+                window.URL.revokeObjectURL(url);
+        }
+    </script>
+}

@@ -1,0 +1,64 @@
+﻿@page
+@model ATMMonitoringWebApp.Pages.HIPAStatusModel
+@attribute [Microsoft.AspNetCore.Authorization.Authorize]
+
+@{
+    ViewData["Title"] = "HIPA Status";
+}
+
+<div class="dashboard-container compact-page">
+
+    <div class="page-title-row compact-title">
+        <div>
+            <h1>HIPA Protection Status</h1>
+            <p>Hitachi Integrated Protection Application monitoring overview</p>
+        </div>
+
+        <div class="page-actions">
+            <button class="btn-primary">Download Status</button>
+        </div>
+    </div>
+
+    <div class="summary-grid compact-summary">
+        <div class="summary-card red-card"><h3>Active Alerts</h3><h2>4</h2><p>Security alerts detected</p></div>
+        <div class="summary-card green-card"><h3>Connected Terminals</h3><h2>3091</h2><p>Currently communicating</p></div>
+        <div class="summary-card red-card"><h3>Disconnected</h3><h2>479</h2><p>Terminal communication lost</p></div>
+        <div class="summary-card blue-card"><h3>Policy Sync</h3><h2>96%</h2><p>Policy synchronized</p></div>
+    </div>
+
+    <div class="dashboard-grid compact-grid">
+        <div class="dashboard-panel compact-panel">
+            <h3>Alert Status</h3>
+            <div class="hipa-status-row compact-status-row"><span>Critical Alerts</span><strong class="danger-text">1</strong></div>
+            <div class="hipa-status-row compact-status-row"><span>Warning Alerts</span><strong class="warning-text">3</strong></div>
+            <div class="hipa-status-row compact-status-row"><span>Resolved Alerts</span><strong class="success-text">18</strong></div>
+        </div>
+
+        <div class="dashboard-panel compact-panel">
+            <h3>Terminal Status</h3>
+            <div class="hipa-status-row compact-status-row"><span>Connected</span><strong class="success-text">3091</strong></div>
+            <div class="hipa-status-row compact-status-row"><span>Disconnected</span><strong class="danger-text">479</strong></div>
+            <div class="hipa-status-row compact-status-row"><span>Total Terminals</span><strong>3570</strong></div>
+        </div>
+    </div>
+
+    <div class="dashboard-panel compact-panel">
+        <h3>Protection Module Status</h3>
+        <table class="dashboard-table compact-table">
+            <thead>
+                <tr><th>Protection Module</th><th>ON</th><th>OFF</th><th>Total</th><th>Status</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>HIPA Protection</td><td class="success-text">3090</td><td class="danger-text">480</td><td>3570</td><td><span class="badge badge-online">Active</span></td></tr>
+                <tr><td>Script Protection</td><td class="success-text">3055</td><td class="danger-text">515</td><td>3570</td><td><span class="badge badge-online">Active</span></td></tr>
+                <tr><td>CD/DVD ROM Protection</td><td class="success-text">2978</td><td class="danger-text">592</td><td>3570</td><td><span class="badge badge-online">Active</span></td></tr>
+                <tr><td>USB Protection</td><td class="success-text">3102</td><td class="danger-text">468</td><td>3570</td><td><span class="badge badge-online">Active</span></td></tr>
+                <tr><td>Registry Protection</td><td class="success-text">3022</td><td class="danger-text">548</td><td>3570</td><td><span class="badge badge-online">Active</span></td></tr>
+                <tr><td>PowerShell Protection</td><td class="success-text">2864</td><td class="danger-text">706</td><td>3570</td><td><span class="badge badge-warning">Review</span></td></tr>
+                <tr><td>Command Prompt Protection</td><td class="success-text">2890</td><td class="danger-text">680</td><td>3570</td><td><span class="badge badge-warning">Review</span></td></tr>
+                <tr><td>KSE Encryption</td><td class="success-text">3282</td><td class="danger-text">288</td><td>3570</td><td><span class="badge badge-secure">Secured</span></td></tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>

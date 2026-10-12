@@ -1,0 +1,20 @@
+
+# Visual Studio temporary files
+.vs/
+*.user
+*.suo
+
+# Build output
+bin/
+obj/
+
+# Local development configuration
+appsettings.Development.json
+
+# Publishing and sensitive files
+*.publishsettings
+*.pfx
+*.pem
+*.key
+.env
+.env.*
